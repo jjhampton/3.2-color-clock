@@ -13,8 +13,6 @@
   var $seconds = document.querySelector(".clock .seconds");
 
 
-
-
   function getTime() {
     currentDate = new Date(); // Assigns current date and time as a new Date object to variable
     hours = currentDate.getHours();
@@ -29,11 +27,22 @@
     array[index] = twoDigitTime;
   }
 
+  //Logs time to the console
   function logTime() {
     getTime();
     timeArray.forEach(setTimeFormat);
     console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
   }
+  //Displays time to spans within page's clock element
+  function displayTime() {
+    getTime();
+    timeArray.forEach(setTimeFormat);
+    //console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
+    $hours.textContent = timeArray[0];
+    $minutes.textContent = timeArray[1];
+    $seconds.textContent = timeArray[2];
+  }
 
   setInterval(logTime, 1000);
+  setInterval(displayTime, 1000);
 })();
