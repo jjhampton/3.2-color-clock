@@ -54,8 +54,8 @@
   function getHexColor(hoursHex, minutesHex, secondsHex) {
     var hexColor;
 
-    hexColor = "#" + hoursHex + minutesHex + secondsHex;
-    return hexColor;
+    hexColor = hoursHex + minutesHex + secondsHex;
+    return hexColor.toString();
   }
 
   //Logs time and percent/minute to the console
@@ -77,6 +77,7 @@
     hexSeconds = setDigitFormatString(hexSeconds);
     hexColor = getHexColor(hexHours, hexMinutes, hexSeconds);
 
+
     console.log(hexColor);
   }
 
@@ -87,13 +88,25 @@
     return percent;
   }
 
+  //Function to "programmatically lighten or darken a hex color by a specific amount. Just pass in a string like "3F6D2A" for the color (col) and an base10 integer (amt) for the amount to lighten or darken. To darken, pass in a negative number (i.e. -20)."
 
+  function lightenDarkenColor(col,amt) {
+    var num = parseInt(col,16);
+    var r = (num >> 16) + amt;
+    var b = ((num >> 8) & 0x00FF) + amt;
+    var g = (num & 0x0000FF) + amt;
+    var newColor = g | (b << 8) | (r << 16);
+    return newColor.toString(16);
+  }
 
-
-
-  //Displays time to spans within page's clock element and resizes <hr> corresponding to seconds w/ getPercentOfMinute()
+//Displays time to spans within page's clock element and resizes <hr> corresponding to seconds w/ getPercentOfMinute()
   function displayTime() {
     var timerBarSize; //Size to set $timerBar to
+    var hexHours;
+    var hexMinutes;
+    var hexSeconds;
+    var hexColorFrom;
+    var hexColorTo;
 
     getTime();
     timeArray.forEach(setDigitFormatArray);
@@ -103,10 +116,23 @@
     $seconds.textContent = timeArray[2];
 
     timerBarSize = getPercentOfMinute(timeArray[2]);
+
     $timerBar.style.width = (timerBarSize * 100) + "%";
+
+    hexHours = getHexValue(timeArray[0]);
+    hexMinutes = getHexValue(timeArray[1]);
+    hexSeconds = getHexValue(timeArray[2]);
+    hexHours = setDigitFormatString(hexHours);
+    hexMinutes = setDigitFormatString(hexMinutes);
+    hexSeconds = setDigitFormatString(hexSeconds);
+    hexColorTo = getHexColor(hexHours, hexMinutes, hexSeconds);
+    hexColorFrom = lightenDarkenColor(hexColorTo, 50);
+
+
+    document.body.style.backgroundImage = "-webkit-gradient(radial, 50% 50%, 200, 50% 50%, 700, from(#" + hexColorFrom + "), to(#" + hexColorTo + "))";
   }
 
   setInterval(logTime, 1000);
-  setInterval(displayTime, 1000);
+  setInterval(displayTime, 100);
 
 })();
