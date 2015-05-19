@@ -23,10 +23,15 @@
     timeArray = [hours, minutes, seconds];
   }
 
-  //Function that returns time unit as a two-digit number if it is less than 10.  credit: http://stackoverflow.com/questions/8043026/javascript-format-number-to-have-2-digit users: nickolusroy, apfz
-  function setTimeFormat(unitOfTime, index, array) {
-    var twoDigitTime = unitOfTime >= 10 ? unitOfTime : "0"+ unitOfTime.toString();
-    array[index] = twoDigitTime;
+  //Function that returns input value as a two-digit number if it is less than 10.  credit: http://stackoverflow.com/questions/8043026/javascript-format-number-to-have-2-digit users: nickolusroy, apfz
+  function setDigitFormatArray(unitOfTime, index, array) {
+    var twoDigit = unitOfTime >= 10 ? unitOfTime : "0" + unitOfTime.toString();
+    array[index] = twoDigit;
+  }
+
+  function setDigitFormatString(string) {
+    var twoDigit = (string.length > 1) ? string : "0" + string;
+    return twoDigit;
   }
 
   //logs percentage of a minute that the current seconds represents
@@ -38,22 +43,41 @@
     console.log(percent);
   }
 
-  //logs hexadecimal color that the current seconds represents
-  function logHexColor(seconds) {
-    var hexSeconds;
+  //returns hexadecimal value that the current unit of time represents
+  function getHexValue(unitOfTime) {
+    var hexValue;
+    hexValue = unitOfTime.toString(16);
+    return hexValue;
+  }
 
-    seconds = Number(seconds);
-    hexSeconds = seconds.toString(16);
-    console.log(hexSeconds);
+  //returns a string of the complete hexadecimal color that the hex values for each unit of time represents
+  function getHexColor(hoursHex, minutesHex, secondsHex) {
+    var hexColor;
+
+    hexColor = "#" + hoursHex + minutesHex + secondsHex;
+    return hexColor;
   }
 
   //Logs time and percent/minute to the console
   function logTime() {
+    var hexHours;
+    var hexMinutes;
+    var hexSeconds;
+    var hexColor;
+
     getTime();
-    timeArray.forEach(setTimeFormat);
+    timeArray.forEach(setDigitFormatArray);
     console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
     logPercentOfMinute(timeArray[2]);
-    logHexColor(timeArray[2]);
+    hexHours = getHexValue(timeArray[0]);
+    hexMinutes = getHexValue(timeArray[1]);
+    hexSeconds = getHexValue(timeArray[2]);
+    hexHours = setDigitFormatString(hexHours);
+    hexMinutes = setDigitFormatString(hexMinutes);
+    hexSeconds = setDigitFormatString(hexSeconds);
+    hexColor = getHexColor(hexHours, hexMinutes, hexSeconds);
+
+    console.log(hexColor);
   }
 
   //returns percentage of a minute that the current seconds represents
@@ -63,12 +87,16 @@
     return percent;
   }
 
+
+
+
+
   //Displays time to spans within page's clock element and resizes <hr> corresponding to seconds w/ getPercentOfMinute()
   function displayTime() {
     var timerBarSize; //Size to set $timerBar to
 
     getTime();
-    timeArray.forEach(setTimeFormat);
+    timeArray.forEach(setDigitFormatArray);
     //console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
     $hours.textContent = timeArray[0];
     $minutes.textContent = timeArray[1];
