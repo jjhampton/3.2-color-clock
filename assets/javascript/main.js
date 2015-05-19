@@ -31,9 +31,20 @@
 
   //logs percentage of a minute that the current seconds represents
   function logPercentOfMinute(seconds) {
+    var percent;
+
     seconds = Number(seconds);
-    var percent = seconds / 60;
+    percent = seconds / 60;
     console.log(percent);
+  }
+
+  //logs hexadecimal color that the current seconds represents
+  function logHexColor(seconds) {
+    var hexSeconds;
+
+    seconds = Number(seconds);
+    hexSeconds = seconds.toString(16);
+    console.log(hexSeconds);
   }
 
   //Logs time and percent/minute to the console
@@ -42,6 +53,7 @@
     timeArray.forEach(setTimeFormat);
     console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
     logPercentOfMinute(timeArray[2]);
+    logHexColor(timeArray[2]);
   }
 
   //returns percentage of a minute that the current seconds represents
