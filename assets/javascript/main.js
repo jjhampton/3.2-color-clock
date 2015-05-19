@@ -11,6 +11,8 @@
   var $hours = document.querySelector(".clock .hours");
   var $minutes = document.querySelector(".clock .minutes");
   var $seconds = document.querySelector(".clock .seconds");
+  var $timerBar = document.querySelector(".timer-bar");
+
 
 
   function getTime() {
@@ -42,17 +44,27 @@
     logPercentOfMinute(timeArray[2]);
   }
 
-  //Displays time to spans within page's clock element
+  //returns percentage of a minute that the current seconds represents
+  function getPercentOfMinute(seconds) {
+    seconds = Number(seconds);
+    var percent = seconds / 60;
+    return percent;
+  }
+
+  //Displays time to spans within page's clock element and resizes <hr> corresponding to seconds w/ getPercentOfMinute()
   function displayTime() {
+    var timerBarSize; //Size to set $timerBar to
+
     getTime();
     timeArray.forEach(setTimeFormat);
     //console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
     $hours.textContent = timeArray[0];
     $minutes.textContent = timeArray[1];
     $seconds.textContent = timeArray[2];
+
+    timerBarSize = getPercentOfMinute(timeArray[2]);
+    $timerBar.style.width = (timerBarSize * 100) + "%";
   }
-
-
 
   setInterval(logTime, 1000);
   setInterval(displayTime, 1000);

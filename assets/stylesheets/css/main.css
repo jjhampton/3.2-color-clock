@@ -32,4 +32,4 @@ h1.clock > span {
   color: #fff; }
 
 h1.clock > hr {
-  width: 0; }
+  width: 100%; }
