@@ -8,6 +8,11 @@
   var seconds;
   var timeArray;
 
+  var $hours = document.querySelector(".clock .hours");
+  var $minutes = document.querySelector(".clock .minutes");
+  var $seconds = document.querySelector(".clock .seconds");
+
+
 
 
   function getTime() {
@@ -27,7 +32,6 @@
   function logTime() {
     getTime();
     timeArray.forEach(setTimeFormat);
-    console.log("timeArray map working");
     console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
   }
 

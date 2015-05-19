@@ -13,4 +13,20 @@ body {
   background-color: #440951;
   background-image: -moz-radial-gradient(center 45deg, circle cover, #b032cb, #440951);
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 800, from(#b032cb), to(#440951));
-  background-image: radial-gradient(center 45deg, circle cover, #b032cb, #440951); }
+  background-image: radial-gradient(center 45deg, circle cover, #b032cb, #440951);
+  height: 100%;
+  position: relative; }
+
+h1.clock {
+  width: 292px;
+  height: 74px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -37px;
+  margin-left: -146px; }
+
+h1.clock > span {
+  display: inline-block;
+  font-size: 2em;
+  color: #fff; }
