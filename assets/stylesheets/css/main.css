@@ -30,3 +30,6 @@ h1.clock > span {
   display: inline-block;
   font-size: 2em;
   color: #fff; }
+
+h1.clock > hr {
+  width: 0; }

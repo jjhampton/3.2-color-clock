@@ -27,12 +27,21 @@
     array[index] = twoDigitTime;
   }
 
-  //Logs time to the console
+  //logs percentage of a minute that the current seconds represents
+  function logPercentOfMinute(seconds) {
+    seconds = Number(seconds);
+    var percent = seconds / 60;
+    console.log(percent);
+  }
+
+  //Logs time and percent/minute to the console
   function logTime() {
     getTime();
     timeArray.forEach(setTimeFormat);
     console.log(timeArray[0] + ":" + timeArray[1] + ":" +  timeArray[2]);
+    logPercentOfMinute(timeArray[2]);
   }
+
   //Displays time to spans within page's clock element
   function displayTime() {
     getTime();
@@ -43,6 +52,9 @@
     $seconds.textContent = timeArray[2];
   }
 
+
+
   setInterval(logTime, 1000);
   setInterval(displayTime, 1000);
+
 })();
