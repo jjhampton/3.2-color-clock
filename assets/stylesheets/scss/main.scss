@@ -1,7 +1,7 @@
 @import '../../../bower_components/bourbon/app/assets/stylesheets/bourbon';
 @import '../../../bower_components/neat/app/assets/stylesheets/neat';
 
-$clock-font: 'Righteous', sans-serif;
+$clock-font: 'Nova Mono', sans-serif;
 
 
 html {
@@ -16,23 +16,27 @@ body {
 }
 
 h1.clock {
-  width: 292px;
+  width: 270px;
   height: 74px;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-top: -37px;
-  margin-left: -146px;
+  margin-left: -135px;
 
 }
 
-h1.clock > span {
+h1.clock  span {
   display: inline-block;
-  font-size: 2em;
+  font-size: 1.6em;
   font-family: $clock-font;
   color: #fff;
 }
 
-h1.clock > hr {
+h1.clock span:first-child {
+  margin-left: 3px;
+}
+
+h1.clock  hr {
   width: 100%;
 }
