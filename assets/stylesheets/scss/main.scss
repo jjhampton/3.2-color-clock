@@ -15,7 +15,7 @@ body {
   position: relative;
 }
 
-h1.clock {
+section.clock {
   width: 270px;
   height: 74px;
   position: absolute;
@@ -23,20 +23,33 @@ h1.clock {
   left: 50%;
   margin-top: -37px;
   margin-left: -135px;
-
 }
 
-h1.clock  span {
+.clock .hex-color {
+  display: none;
+}
+
+.clock:hover .hex-color {
   display: inline-block;
-  font-size: 1.6em;
+}
+
+.clock:hover .time {
+  display: none;
+}
+
+.time span,
+.hex-color span {
+  display: inline-block;
+  font-size: 2.6em;
   font-family: $clock-font;
   color: #fff;
 }
 
-h1.clock span:first-child {
-  margin-left: 2px;
+.time span:first-child,
+.hex-color span:first-child {
+  margin-left: 32px;
 }
 
-h1.clock  hr {
+.time hr {
   width: 100%;
 }

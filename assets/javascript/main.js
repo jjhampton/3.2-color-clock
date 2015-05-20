@@ -88,6 +88,9 @@
     var hexColorTo;
     var hexColorFrom;
 
+    var $hexHours = document.querySelector('.hex-hours');
+    var $hexMinutes = document.querySelector('.hex-minutes');
+    var $hexSeconds = document.querySelector('.hex-seconds');
 
     var $timerBar = document.querySelector(".timer-bar");
 
@@ -102,9 +105,13 @@
     timerBarSize = getPercentOfMinute(currentTime[2]);
     $timerBar.style.width = (timerBarSize * 100) + "%";
 
-    //Generate hex values from current time
+    //Generate hex values from current time and set units for the corresponding HTML elements
     currentTime = currentTime.map(getHexByte);
     currentTime = currentTime.map(formatDigitString);
+
+    $hexHours.textContent = currentTime[0];
+    $hexMinutes.textContent = currentTime[1];
+    $hexSeconds.textContent = currentTime[2];
 
     // Determine hex color to use for the to and from gradients
     hexColorTo = getHexTriplet(currentTime[0], currentTime[1], currentTime[2]);
@@ -114,22 +121,7 @@
     document.body.style.backgroundImage = "-webkit-gradient(radial, 50% 50%, 200, 50% 50%, 700, from(#" + hexColorFrom + "), to(#" + hexColorTo + "))";
   }
 
-  function clockMouseOver() {
-    var currentTime;
-
-    currentTime = getTime();
-    currentTime.forEach(formatDigitArray);
-    currentTime = currentTime.map(getHexByte);
-    currentTime = currentTime.map(formatDigitString);
-
-    $hours.textContent = currentTime[0].toUpperCase();
-    $minutes.textContent = currentTime[1].toUpperCase();
-    $seconds.textContent = currentTime[2].toUpperCase();
-  }
-
-  //Bind event listener to mouseenter on $clock
-  $clock.addEventListener('mouseenter', clockMouseOver, false);
-  //Set console to log data every second
+    //Set console to log data every second
   setInterval(logTime, 1000);
   //Set screen display to be updated every second
   setInterval(displayToScreen, 1000);
