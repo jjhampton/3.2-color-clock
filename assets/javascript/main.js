@@ -1,6 +1,12 @@
 (function() {
   "use strict";
 
+  //DOM elements
+  var $clock = document.querySelector(".clock");
+  var $hours = document.querySelector(".clock .hours");
+  var $minutes = document.querySelector(".clock .minutes");
+  var $seconds = document.querySelector(".clock .seconds");
+
   //Returns an array containing current time in hours, minutes, & seconds.
   function getTime() {
     var currentDate;
@@ -82,10 +88,7 @@
     var hexColorTo;
     var hexColorFrom;
 
-    //DOM elements
-    var $hours = document.querySelector(".clock .hours");
-    var $minutes = document.querySelector(".clock .minutes");
-    var $seconds = document.querySelector(".clock .seconds");
+
     var $timerBar = document.querySelector(".timer-bar");
 
     //Get current time and set units as properties for the corresponding HTML elements
@@ -111,7 +114,24 @@
     document.body.style.backgroundImage = "-webkit-gradient(radial, 50% 50%, 200, 50% 50%, 700, from(#" + hexColorFrom + "), to(#" + hexColorTo + "))";
   }
 
+  function clockMouseOver() {
+    var currentTime;
+
+    currentTime = getTime();
+    currentTime.forEach(formatDigitArray);
+    currentTime = currentTime.map(getHexByte);
+    currentTime = currentTime.map(formatDigitString);
+
+    $hours.textContent = currentTime[0].toUpperCase();
+    $minutes.textContent = currentTime[1].toUpperCase();
+    $seconds.textContent = currentTime[2].toUpperCase();
+  }
+
+  //Bind event listener to mouseenter on $clock
+  $clock.addEventListener('mouseenter', clockMouseOver, false);
+  //Set console to log data every second
   setInterval(logTime, 1000);
+  //Set screen display to be updated every second
   setInterval(displayToScreen, 1000);
 
 })();
