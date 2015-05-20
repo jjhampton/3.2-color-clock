@@ -1,6 +1,8 @@
 @import '../../../bower_components/bourbon/app/assets/stylesheets/bourbon';
 @import '../../../bower_components/neat/app/assets/stylesheets/neat';
 
+$clock-font: 'Righteous', sans-serif;
+
 
 html {
   height:100%;
@@ -27,6 +29,7 @@ h1.clock {
 h1.clock > span {
   display: inline-block;
   font-size: 2em;
+  font-family: $clock-font;
   color: #fff;
 }
 

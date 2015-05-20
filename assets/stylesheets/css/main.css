@@ -26,6 +26,7 @@ h1.clock {
 h1.clock > span {
   display: inline-block;
   font-size: 2em;
+  font-family: "Righteous", sans-serif;
   color: #fff; }
 
 h1.clock > hr {
